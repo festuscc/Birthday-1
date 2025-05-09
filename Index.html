@@ -1,1 +1,61 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syntymäpäiväajastin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e0f7fa;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #00796b;
+    }
+    .timer {
+      font-size: 50px;
+      margin-top: 50px;
+      color: #00796b;
+    }
+  </style>
+</head>
+<body>
 
+  <h1>Syntymäpäiväajastin</h1>
+  <div id="countdown" class="timer"></div>
+
+  <script>
+    // Syntymäpäivän päivämäärä ja aika (10.5. klo 00:00)
+    const birthday = new Date("May 10, 2025 00:00:00").getTime();
+
+    // Päivitä ajastinta joka sekunti
+    const x = setInterval(function() {
+
+      // Nykyinen aika
+      const now = new Date().getTime();
+
+      // Laske aikaväli syntymäpäivään
+      const distance = birthday - now;
+
+      // Laske päivät, tunnit, minuutit ja sekunnit
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Näytä ajastin
+      document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+      // Jos syntymäpäivä on tullut, näytä viesti
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "Hyvää syntymäpäivää!";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
